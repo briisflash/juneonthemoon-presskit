@@ -27,7 +27,7 @@ body {
 }
 .artist-name {
   margin: 0;
-  font-size: 32px;
+  font-size: 42px;
   color: var(--accent);
 }
 .artist-tag {
