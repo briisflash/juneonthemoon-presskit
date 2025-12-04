@@ -44,7 +44,7 @@ body {
   margin: 24px 0;
 }
 .hero-img {
-  flex: 1 1 320px;
+  flex: 1 1 200px;
   border-radius: 8px;
   object-fit: cover;
   box-shadow: 0 6px 14px rgba(0,0,0,0.08);
