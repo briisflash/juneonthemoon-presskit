@@ -44,8 +44,8 @@ body {
   margin: 24px 0;
 }
 .hero-img {
-  flex: 1 1 50px;
-   width: 200px;      /* pick whatever half-size means for you */
+  flex: 1 1 100px;
+   width: 400px;      /* pick whatever half-size means for you */
   height: 150px;
   border-radius: 8px;
   object-fit: cover;
