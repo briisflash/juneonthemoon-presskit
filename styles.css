@@ -2,7 +2,7 @@
   --max-width: 900px;
   --accent: #5c3d5b;
   --muted: #666;
-  --bg: #af4c0f;
+  --bg: ##3b2f3b;
 }
 * { box-sizing: border-box; }
 body {
@@ -27,7 +27,7 @@ body {
 }
 .artist-name {
   margin: 0;
-  font-size: 32px;
+  font-size: 42px;
   color: var(--accent);
 }
 .artist-tag {
@@ -44,7 +44,9 @@ body {
   margin: 24px 0;
 }
 .hero-img {
-  flex: 1 1 320px;
+  flex: 1 1 100px;
+   width: 400px;      /* pick whatever half-size means for you */
+  height: 150px;
   border-radius: 8px;
   object-fit: cover;
   box-shadow: 0 6px 14px rgba(0,0,0,0.08);
