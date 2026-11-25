@@ -44,7 +44,7 @@ function openArtist(a){
   const photo=node("img","profile-photo");photo.src=a.portrait;photo.alt="Portrait of "+a.name;d.append(photo,node("p",null,a.bio));
   const links=node("div","dialog-links");addLink(links,"Download press kit",a.pressKit);addLink(links,"Spotify",a.spotify);addLink(links,"Bandcamp",a.bandcamp);addLink(links,"Instagram",a.instagram);addLink(links,"Original artist website",a.originalSite);d.append(links);
   const related=videos.filter(v=>v.artistSlugs.includes(a.slug));if(related.length){d.append(node("h3",null,"Music films"));related.forEach(v=>{const b=node("button","button",v.title+" ▶");b.type="button";b.addEventListener("click",()=>{$("#artist-dialog").close();openVideo(v)});d.append(b);});}
-  $("#artist-dialog").showModal();$("#artist-dialog-title").textContent=a.name;
+  $("#artist-dialog").setAttribute("aria-label",a.name+" artist profile");$("#artist-dialog").showModal();
 }
 function showVideos(){
   const q=$("#video-search").value.trim().toLowerCase(), category=$("#video-category").value;
@@ -63,7 +63,7 @@ function openVideo(v){
   if(/^[\w-]{11}$/.test(v.youtubeId)){const frame=node("iframe","video-embed");frame.title=v.title;frame.allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share";frame.allowFullscreen=true;frame.referrerPolicy="strict-origin-when-cross-origin";frame.src="https://www.youtube-nocookie.com/embed/"+v.youtubeId;d.append(frame);}
   d.append(node("p","video-help",v.artistSlugs.map(s=>artistBySlug(s)?.name||s).join(" + ")));
   if(v.description)d.append(node("p",null,v.description));
-  $("#video-dialog").showModal();$("#video-dialog-title").textContent=v.title;
+  $("#video-dialog").setAttribute("aria-label",v.title+" music video");$("#video-dialog").showModal();
 }
 const regions=[...new Set(artists.map(a=>a.region))].sort();regions.forEach(r=>{const o=node("option",null,r);o.value=r;$("#artist-region").append(o);});
 $("#artist-search").addEventListener("input",showArtists);$("#artist-region").addEventListener("change",showArtists);
