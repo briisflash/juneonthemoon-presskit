@@ -1,0 +1,5 @@
+# Development-only configuration for the Sessions on the Moon preview.
+# This file exists on sessions-on-the-moon-development, not main.
+[build]
+  command = "bash platform/build.sh"
+  publish = "dist"
