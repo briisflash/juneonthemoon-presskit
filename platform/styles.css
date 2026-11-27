@@ -63,3 +63,17 @@
 .journal-aside h3{font-size:clamp(36px,4vw,56px);margin:14px 0}
 @media(max-width:820px){.past-sessions-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.journal-layout{grid-template-columns:1fr;gap:20px}}
 @media(max-width:600px){.past-sessions-grid{grid-template-columns:1fr}.journal-aside{padding-left:22px}}
+
+/* Pitch-aligned artist roster, mission, and roadmap */
+.roster-panel{margin-top:45px;border-top:1px solid var(--line);padding:34px 0 0}
+.roster-panel h3{font-size:clamp(38px,4.4vw,62px);margin:9px 0 27px}
+.featured-roster{display:flex;gap:10px;flex-wrap:wrap}
+.featured-roster span{padding:9px 14px;border:1px solid #686154;font:12px var(--sans);color:#e3d3bd}
+.roster-note{max-width:750px;color:var(--muted);font-size:13px;margin:25px 0}
+.mission-brief{border-top:1px solid #6b5d48;margin:22px 0 26px;padding:25px 0 5px}
+.mission-brief p:not(.eyebrow){font-size:15px;line-height:1.7;color:#e0d0bc}
+.roadmap-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.roadmap-card{padding:clamp(24px,3.5vw,42px);background:#24231f;border:1px solid var(--line);min-height:245px}
+.roadmap-card h3{font-size:clamp(34px,4vw,53px);margin:15px 0 23px}
+.roadmap-card p:not(.eyebrow){font-size:14px;color:var(--muted)}
+@media(max-width:650px){.roadmap-grid{grid-template-columns:1fr}}
