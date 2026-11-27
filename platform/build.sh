@@ -1,29 +1,23 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Publish the independent Sessions on the Moon prototype from a repository
-# that also hosts the original June on the Moon press kit.
+# Build the independent Sessions on the Moon preview.
+# Executed from the repository root by Netlify.
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 rm -rf dist
 mkdir -p dist/assets
-cp platform/index.html platform/styles.css platform/app.js dist/\ncp -R platform/journal dist/journal
+cp platform/index.html platform/styles.css platform/app.js dist/
+cp -R platform/journal dist/journal
 cp -R assets/. dist/assets/
 
-# Source files live in platform/, so they access the root assets via ../assets.
-# After staging dist/, assets sit beside the prototype pages.
-python3 - <<'PY'
-from pathlib import Path
-folder = Path("dist")
-for name in ("styles.css", "app.js"):
-    path = folder / name
-    text = path.read_text()
-    text = text.replace("../assets/", "assets/")
-    if name == "app.js":
-        text = text.replace('originalSite: "../"', 'originalSite: "https://brownlotuspress.netlify.app/"')
-    path.write_text(text)
-html = folder / "index.html"
-text = html.read_text().replace('href="../">Original June on the Moon press kit', 'href="https://brownlotuspress.netlify.app/">Original June on the Moon press kit')
-html.write_text(text)
-PY
-echo "Built Sessions on the Moon prototype at dist/"
+# Source files live in platform/, but the published files live at dist/ root.
+sed -i 's#\.\./assets/#assets/#g' dist/styles.css dist/app.js
+sed -i 's#originalSite: "../"#originalSite: "https://brownlotuspress.netlify.app/"#' dist/app.js
+sed -i 's#href="../">Original June on the Moon press kit#href="https://brownlotuspress.netlify.app/">Original June on the Moon press kit#' dist/index.html
+
+test -f dist/index.html
+test -f dist/journal/index.html
+test -f dist/journal/articles/zamrock.html
+test -f dist/journal/archive.html
+echo "Built site and journal in dist/"
