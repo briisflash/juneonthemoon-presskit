@@ -7,7 +7,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 rm -rf dist
 mkdir -p dist/assets
-cp platform/index.html platform/styles.css platform/app.js dist/
+cp platform/index.html platform/styles.css platform/app.js dist/\ncp -R platform/journal dist/journal
 cp -R assets/. dist/assets/
 
 # Source files live in platform/, so they access the root assets via ../assets.
