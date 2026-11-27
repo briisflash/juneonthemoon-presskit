@@ -21,6 +21,31 @@ const artists = [
 const videos = [
   {id:"leaving-samsara",title:"Leaving Samsara (where i am)",artistSlugs:["june-on-the-moon"],category:"official",youtubeId:"In9rB8typNE",description:"Featured music film from June on the Moon."}
 ];
+
+// Verified past-session records can be added here when dates, venues and materials are available.
+// Example record fields: title, date, city, venue, description, image, videoUrl, setlist.
+const pastSessions = [];
+function renderPastSessions(){
+  const grid=document.querySelector("#past-sessions-grid");
+  const empty=document.querySelector("#past-sessions-empty");
+  if(!grid||!empty)return;
+  grid.replaceChildren();
+  empty.hidden=pastSessions.length>0;
+  for(const event of pastSessions){
+    const card=node("article","past-session-card");
+    card.append(node("p","eyebrow",[event.date,event.city].filter(Boolean).join(" / ")));
+    card.append(node("h3",null,event.title||"Past session"));
+    if(event.venue)card.append(node("p","meta",event.venue));
+    if(event.description)card.append(node("p",null,event.description));
+    if(event.image){
+      const img=node("img");img.src=event.image;img.alt=event.title||"Session photograph";img.loading="lazy";card.prepend(img);
+    }
+    if(event.videoUrl){const links=node("div","dialog-links");addLink(links,"Watch session",event.videoUrl);card.append(links);}
+    if(event.setlist && event.setlist.length){card.append(node("p","meta","SETLIST: "+event.setlist.join(" · ")));}
+    grid.append(card);
+  }
+}
+
 const $ = (selector) => document.querySelector(selector);
 const artistBySlug = (slug) => artists.find(a => a.slug === slug);
 const safeUrl = url => { try { const u = new URL(url, location.href); return ['https:','http:'].includes(u.protocol) ? u.href : null; } catch {return null;} };
@@ -75,4 +100,4 @@ $("#artist-dialog").addEventListener("close",()=>{$("#artist-detail").replaceChi
 $("#menu-toggle").addEventListener("click",()=>{const open=$("#nav").classList.toggle("open");$("#menu-toggle").setAttribute("aria-expanded",String(open));});
 document.querySelectorAll("#nav a").forEach(a=>a.addEventListener("click",()=>{$("#nav").classList.remove("open");$("#menu-toggle").setAttribute("aria-expanded","false")}));
 $("#year").textContent=new Date().getFullYear();
-showArtists();showVideos();
+showArtists();showVideos();renderPastSessions();
